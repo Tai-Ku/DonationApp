@@ -8,10 +8,12 @@ import {persistReducer, persistStore} from 'redux-persist';
 import {logger} from 'redux-logger';
 import User from './reducers/User';
 import Categories from './reducers/Categories';
+import Donation from './reducers/Donation';
 
 const rootReducer = combineReducers({
   user: User,
   categories: Categories,
+  donation: Donation,
 });
 
 const configuration = {
@@ -26,7 +28,8 @@ const store = configureStore({
   middleware: getDefaultMiddleware => {
     return getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(logger);
+    });
+    // .concat(logger);
   },
 });
 

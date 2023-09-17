@@ -17,12 +17,16 @@ import Header from '../../components/Header/Header';
 import Search from '../../components/Search/Search';
 import Tab from '../../components/Tab/Tab';
 import {updateCategories} from '../../redux/reducers/Categories';
+import {resetDonation} from '../../redux/reducers/Donation';
 
 const Home = () => {
   const {firstName, lastName, proFileImage} = useSelector(state => state.user);
-  const dispatch = useDispatch();
   const categories = useSelector(state => state.categories);
+  const donations = useSelector(state => state.donation);
+  const dispatch = useDispatch();
 
+  dispatch(resetDonation());
+  console.log(donations);
   const [categoryPage, setCategoryPage] = useState(1);
   const [categoryList, setCategoryList] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
