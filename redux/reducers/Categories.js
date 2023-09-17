@@ -65,7 +65,6 @@ const Categories = createSlice({
       return initialState;
     },
     updateCategories: (state, action) => {
-      console.log({action});
       state.selectedCategoryId = action.payload;
     },
   },
