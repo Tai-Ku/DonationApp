@@ -17,10 +17,14 @@ import Header from '../../components/Header/Header';
 import Search from '../../components/Search/Search';
 import Tab from '../../components/Tab/Tab';
 import {updateCategories} from '../../redux/reducers/Categories';
-import {resetDonation} from '../../redux/reducers/Donation';
+import {
+  resetDonation,
+  updateSelectedDonationId,
+} from '../../redux/reducers/Donation';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
+import {Routes} from '../../navigation/Routes';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const {firstName, lastName, proFileImage} = useSelector(state => state.user);
   const categories = useSelector(state => state.categories);
   const donations = useSelector(state => state.donation);
@@ -127,8 +131,14 @@ const Home = () => {
         {donationItems.length > 0 && (
           <View style={styles.donationItemsContainer}>
             {donationItems.map((item, i) => (
-              <View style={styles.singleDonationItem}>
+              <View style={styles.singleDonationItem} key={item.donationItemId}>
                 <SingleDonationItem
+                  onPress={selectedCategoryId => {
+                    dispatch(updateSelectedDonationId(selectedCategoryId));
+                    navigation.navigate(Routes.SingleDonationItem);
+                    console.log({selectedCategoryId});
+                  }}
+                  donationItemId={item.donationItemId}
                   donationTitle={item.name}
                   key={item.donationItemId}
                   badgeTitle={
