@@ -4,7 +4,7 @@ import React, {useRef, useState} from 'react';
 import {View, TextInput, Pressable} from 'react-native';
 import styles from './syles';
 
-const Search = ({onSearch}) => {
+const Search = ({onSearch, placeholder}) => {
   const textInputRef = useRef(null);
   const [search, setSearch] = useState('');
 
@@ -13,12 +13,13 @@ const Search = ({onSearch}) => {
   };
   const handleSearch = value => {
     setSearch(value);
-    onSearch(value);
+    // onSearch(value);
   };
   return (
     <Pressable style={styles.searchInputContainer} onPress={handleFocus}>
       <FontAwesomeIcon icon={faSearch} color="#25C0FF" size={22} />
       <TextInput
+        placeholder={placeholder}
         value={search}
         ref={textInputRef}
         style={styles.searchInput}
