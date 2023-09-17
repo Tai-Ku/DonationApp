@@ -11,10 +11,15 @@ const SingleDonationItem = ({uri, badgeTitle, donationTitle, price}) => {
         <View style={styles.badge}>
           <Badge title={badgeTitle} />
         </View>
-        <Image resizeMode="contain" source={{uri}} style={styles.image} />
+        <Image source={{uri}} style={styles.image} />
       </View>
       <View style={styles.donationInfo}>
-        <Header title={donationTitle} type={3} color="#0A043C" />
+        <Header
+          title={donationTitle}
+          type={3}
+          color="#0A043C"
+          numberOfLines={1}
+        />
         <View style={styles.price}>
           <Header title={'$' + price.toFixed(2)} type={3} color="#156CF7" />
         </View>

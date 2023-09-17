@@ -18,6 +18,7 @@ import Search from '../../components/Search/Search';
 import Tab from '../../components/Tab/Tab';
 import {updateCategories} from '../../redux/reducers/Categories';
 import {resetDonation} from '../../redux/reducers/Donation';
+import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
 
 const Home = () => {
   const {firstName, lastName, proFileImage} = useSelector(state => state.user);
@@ -25,12 +26,18 @@ const Home = () => {
   const donations = useSelector(state => state.donation);
   const dispatch = useDispatch();
 
-  dispatch(resetDonation());
-  console.log(donations);
+  const [donationItems, seDonationItems] = useState([]);
   const [categoryPage, setCategoryPage] = useState(1);
   const [categoryList, setCategoryList] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(false);
   const categoryPageSize = 4;
+
+  useEffect(() => {
+    const filteredItems = donations.items.filter(value =>
+      value.categoryIds.includes(categories.selectedCategoryId),
+    );
+    seDonationItems(filteredItems);
+  }, [categories.selectedCategoryId]);
 
   useEffect(() => {
     setIsLoadingCategories(true);
@@ -117,6 +124,25 @@ const Home = () => {
             )}
           />
         </View>
+        {donationItems.length > 0 && (
+          <View style={styles.donationItemsContainer}>
+            {donationItems.map((item, i) => (
+              <View style={styles.singleDonationItem}>
+                <SingleDonationItem
+                  donationTitle={item.name}
+                  key={item.donationItemId}
+                  badgeTitle={
+                    categories.categories.filter(
+                      val => val.categoryId === categories.selectedCategoryId,
+                    )[0].name
+                  }
+                  price={parseFloat(item.price)}
+                  uri={item.image}
+                />
+              </View>
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
