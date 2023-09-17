@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import styles from './styles';
 
-const Header = ({title, type}) => {
+const Header = ({title, type, color = '#000000'}) => {
   const styleToApply = () => {
     switch (type) {
       case 1:
@@ -17,7 +17,7 @@ const Header = ({title, type}) => {
   };
   return (
     <View>
-      <Text style={styleToApply()}>{title}</Text>
+      <Text style={[styleToApply(), color && {color}]}>{title}</Text>
     </View>
   );
 };
