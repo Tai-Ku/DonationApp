@@ -130,27 +130,32 @@ const Home = ({navigation}) => {
         </View>
         {donationItems.length > 0 && (
           <View style={styles.donationItemsContainer}>
-            {donationItems.map((item, i) => (
-              <View style={styles.singleDonationItem} key={item.donationItemId}>
-                <SingleDonationItem
-                  onPress={selectedCategoryId => {
-                    dispatch(updateSelectedDonationId(selectedCategoryId));
-                    navigation.navigate(Routes.SingleDonationItem);
-                    console.log({selectedCategoryId});
-                  }}
-                  donationItemId={item.donationItemId}
-                  donationTitle={item.name}
-                  key={item.donationItemId}
-                  badgeTitle={
-                    categories.categories.filter(
-                      val => val.categoryId === categories.selectedCategoryId,
-                    )[0].name
-                  }
-                  price={parseFloat(item.price)}
-                  uri={item.image}
-                />
-              </View>
-            ))}
+            {donationItems.map((item, i) => {
+              const categoryInfomation = categories.categories.filter(
+                val => val.categoryId === categories.selectedCategoryId,
+              )[0].name;
+
+              return (
+                <View
+                  style={styles.singleDonationItem}
+                  key={item.donationItemId}>
+                  <SingleDonationItem
+                    onPress={selectedCategoryId => {
+                      dispatch(updateSelectedDonationId(selectedCategoryId));
+                      navigation.navigate(Routes.SingleDonationItem, {
+                        categoryInfomation,
+                      });
+                    }}
+                    donationItemId={item.donationItemId}
+                    donationTitle={item.name}
+                    key={item.donationItemId}
+                    badgeTitle={categoryInfomation}
+                    price={parseFloat(item.price)}
+                    uri={item.image}
+                  />
+                </View>
+              );
+            })}
           </View>
         )}
       </ScrollView>
