@@ -3,14 +3,16 @@ import {Text, View, SafeAreaView} from 'react-native';
 import globalStyles from '../../assets/styles/globalstyles';
 import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
+import Tab from '../../components/Tab/Tab';
 
 const Home = () => {
   const onPress = () => console.log('onPress');
   return (
     <SafeAreaView style={[globalStyles.backgroundWhite, globalStyles.flex]}>
       <Header title={'Azzahri A.'} type={1} />
-      <Button title={'Donate'} onPress={onPress} />
-      <Button title={'Donate'} isDisable={true} onPress={onPress} />
+      <View style={{width: 130}}>
+        <Tab title={'Donate'} isActive={true} onPress={onPress} />
+      </View>
     </SafeAreaView>
   );
 };
