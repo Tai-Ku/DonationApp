@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   },
   isActiveTab: {
     backgroundColor: '#f3f5f9',
+    color: 'black',
   },
   title: {
     fontFamily: 'Inter',
