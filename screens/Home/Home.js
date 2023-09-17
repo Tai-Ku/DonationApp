@@ -18,6 +18,7 @@ import Search from '../../components/Search/Search';
 const Home = () => {
   const {firstName, lastName, proFileImage} = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const categories = useSelector(state => state.categories);
 
   return (
     <SafeAreaView style={[globalStyles.backgroundWhite, globalStyles.flex]}>
